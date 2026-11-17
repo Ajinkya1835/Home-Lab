@@ -1,0 +1,11 @@
+# secrets and host-specific files never belong in here
+.env
+*.env
+!.env.example
+*.key
+*.pem
+id_rsa*
+id_ed25519*
+*.sqlite
+*.db
+.DS_Store

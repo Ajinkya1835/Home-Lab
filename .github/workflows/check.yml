@@ -1,0 +1,56 @@
+name: check
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  repo-hygiene:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: yaml parses
+        run: |
+          python3 - <<'PY'
+          import glob, sys, yaml
+          bad = []
+          for p in glob.glob("**/*.y*ml", recursive=True) + glob.glob("examples/*.y*ml"):
+              try:
+                  list(yaml.safe_load_all(open(p)))
+              except Exception as e:
+                  bad.append(f"{p}: {e}")
+          print("\n".join(bad))
+          sys.exit(1 if bad else 0)
+          PY
+
+      - name: shell syntax
+        run: |
+          for f in examples/*.sh; do bash -n "$f" && echo "ok $f"; done
+
+      - name: demo references resolve
+        run: |
+          cd demo
+          python3 - <<'PY'
+          import os, re, sys
+          html = open("index.html").read()
+          refs = re.findall(r'(?:src|href)="([^"#:]+)"', html)
+          missing = [r for r in refs if not r.startswith("http") and not os.path.exists(r)]
+          print("refs:", refs)
+          print("missing:", missing)
+          sys.exit(1 if missing else 0)
+          PY
+
+      - name: no private identifiers
+        run: |
+          if grep -rInE "tail[0-9a-f]{6}\.ts\.net|100\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}|192\.168\.[0-9]+\.[0-9]+" --exclude-dir=.git . ; then
+            echo "private address or tailnet name found"; exit 1
+          fi
+          echo "clean"
+
+      - uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
