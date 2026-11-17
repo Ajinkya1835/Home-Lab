@@ -112,6 +112,14 @@
     border:1px solid var(--line-2);border-radius:999px;padding:.32rem .72rem;background:rgba(255,255,255,.02)}
   .chip.g{color:var(--green);border-color:rgba(118,185,0,.4);background:var(--green-soft)}
 
+  .mapframe{border:1px solid var(--line);border-radius:12px;background:
+      radial-gradient(700px 320px at 70% 0%, rgba(110,231,183,.07), transparent 60%), var(--panel);
+    padding:14px;box-shadow:0 24px 80px rgba(0,0,0,.55)}
+  .mapframe img{display:block;width:100%;height:auto}
+  .maphint{color:var(--dim);font-size:.82rem;margin:14px 0 0}
+  .maphint a{color:var(--green);text-decoration:none}
+  .maphint a:hover{text-decoration:underline}
+
   .band{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
     background:linear-gradient(180deg,rgba(118,185,0,.06),transparent)}
   .band .wrap{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:34px 26px;flex-wrap:wrap}
@@ -145,6 +153,7 @@
       <a href="#platform">Platform</a>
       <a href="#pipeline">Pipeline</a>
       <a href="#specs">Specs</a>
+      <a href="#map">Topology</a>
       <a href="architecture.html">Architecture</a>
     </nav>
     <a class="ghost" data-repo href="https://github.com/">Repository</a>
@@ -267,6 +276,18 @@
       <span class="chip">Homepage</span><span class="chip">GitHub Actions</span><span class="chip">gitleaks</span>
       <span class="chip">LUKS</span><span class="chip">systemd</span>
     </div>
+  </div>
+</section>
+
+<section id="map">
+  <div class="wrap">
+    <p class="kicker">Topology</p>
+    <h2>Everything in one picture</h2>
+    <p class="sec-sub">Two ways in — the public internet through three Funnel endpoints, and your own devices over WireGuard. One node in the middle, two disks behind it.</p>
+    <div class="mapframe">
+      <img src="architecture-simple.svg" alt="Simplified topology: internet and your devices connect over Tailscale to one homelab node running media, tools and ops containers, which write to an encrypted data disk and a nightly backup disk.">
+    </div>
+    <p class="maphint">Need ports, container names and bridge networks? <a href="architecture.html">Open the detailed map →</a></p>
   </div>
 </section>
 
