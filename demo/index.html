@@ -4,6 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>HOMELAB — self-hosted cloud infrastructure</title>
+<meta name="author" content="Ajinkya Yadav">
+<link rel="me" href="https://github.com/Ajinkya1835">
+<link rel="me" href="https://linkedin.com/in/ajinkya-yadav-70b3671a6">
 <meta name="description" content="A single-node, git-defined private cloud: 14 containers, zero-touch deploys, nightly encrypted backups, disk health telemetry.">
 <style>
   :root{
@@ -57,6 +60,12 @@
   .btn.p:hover{transform:translateY(-1px);box-shadow:0 8px 30px rgba(118,185,0,.35)}
   .btn.s{border:1px solid var(--line-2);color:#fff}
   .btn.s:hover{border-color:var(--green);color:var(--green)}
+  .byline{display:flex;align-items:center;gap:14px;flex-wrap:wrap;color:var(--muted);
+    font-size:.86rem;margin:20px 0 0}
+  .byline b{color:#fff}
+  .byline a{color:var(--green);text-decoration:none;border-bottom:1px solid rgba(118,185,0,.35);
+    padding-bottom:1px;font-size:.82rem}
+  .byline a:hover{border-bottom-color:var(--green);color:#b6ff2e}
   .hero-note{font-family:var(--mono);font-size:.72rem;color:var(--dim);margin-top:18px}
 
   .rail{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);
@@ -156,7 +165,7 @@
       <a href="#map">Topology</a>
       <a href="architecture.html">Architecture</a>
     </nav>
-    <a class="ghost" data-repo href="https://github.com/">Repository</a>
+    <a class="ghost" href="https://github.com/Ajinkya1835">Repository</a>
   </div>
 </header>
 
@@ -170,8 +179,12 @@
   </p>
   <div class="cta">
     <a class="btn p" href="architecture.html">View architecture →</a>
-    <a class="btn s" data-repo href="https://github.com/">Read the source</a>
+    <a class="btn s" href="https://github.com/Ajinkya1835">Read the source</a>
   </div>
+  <p class="byline">Built by <b>Ajinkya Yadav</b>
+    <a href="https://github.com/Ajinkya1835" target="_blank" rel="me noopener">GitHub ↗</a>
+    <a href="https://linkedin.com/in/ajinkya-yadav-70b3671a6" target="_blank" rel="me noopener">LinkedIn ↗</a>
+  </p>
   <p class="hero-note mono">uptime 10d · 14/14 containers healthy · last deploy: automated</p>
 
   <div class="rail">
@@ -296,7 +309,7 @@
     <h2>See how it is wired</h2>
     <div class="cta">
       <a class="btn p" href="architecture.html">Open architecture map →</a>
-      <a class="btn s" data-repo href="https://github.com/">Repository</a>
+      <a class="btn s" href="https://github.com/Ajinkya1835">Repository</a>
     </div>
   </div>
 </div>
@@ -304,7 +317,8 @@
 <footer>
   <div class="wrap">
     <div>
-      <a data-repo href="https://github.com/">GitHub</a>
+      <a href="https://github.com/Ajinkya1835" target="_blank" rel="me noopener">GitHub · @Ajinkya1835</a>
+      <a href="https://linkedin.com/in/ajinkya-yadav-70b3671a6" target="_blank" rel="me noopener">LinkedIn</a>
       <a href="architecture.html">Architecture</a>
       <a href="../docs/runbook.md">Runbook</a>
       <a href="../README.md">README</a>
@@ -313,14 +327,6 @@
   </div>
 </footer>
 
-<script>
-  try {
-    var parts = location.pathname.split('/').filter(Boolean);
-    var repoPath = parts.length ? '/' + parts[0] + '/' : '/';
-    document.querySelectorAll('[data-repo]').forEach(function (a) {
-      a.href = 'https://github.com/' + location.hostname.split('.')[0] + repoPath;
-    });
-  } catch (e) {}
-</script>
+
 </body>
 </html>
