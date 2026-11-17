@@ -4,7 +4,7 @@ A single Ubuntu box that runs 14 containers behind Tailscale, backs itself up ni
 watches its own disks, and tells me on Telegram when something goes wrong. The whole
 server config is a git repo, so the machine can be rebuilt from the last commit.
 
-**[→ Live demo](https://ajinkya1835.github.io/homelab/demo/)** · [Topology](demo/architecture-simple.svg) · [Architecture map](docs/architecture.html) · [Runbook](docs/runbook.md)
+**[→ Live demo](https://ajinkya1835.github.io/Home-Lab/demo/)** · [Topology](demo/architecture-simple.svg) · [Architecture map](docs/architecture.html) · [Runbook](docs/runbook.md)
 
 Built by **Ajinkya Yadav** — [GitHub](https://github.com/Ajinkya1835) · [LinkedIn](https://linkedin.com/in/ajinkya-yadav-70b3671a6)
 
