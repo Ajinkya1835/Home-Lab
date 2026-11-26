@@ -9,3 +9,10 @@ id_ed25519*
 *.sqlite
 *.db
 .DS_Store
+
+# local state
+*.log
+docker/*/data/
+docker/*/influxdb/
+docker/immich/postgres/
+docker/homepage/public/status.json

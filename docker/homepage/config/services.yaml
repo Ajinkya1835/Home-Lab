@@ -1,0 +1,41 @@
+- Apps:
+    - Immich:
+        icon: immich.png
+        href: https://homelab.example.ts.net:8444
+        description: Photos & video
+        server: local
+        container: immich_server
+    - Jellyfin:
+        icon: jellyfin.png
+        href: https://homelab.example.ts.net:10000
+        description: Media server
+        server: local
+        container: jellyfin
+    - Vaultwarden:
+        icon: vaultwarden.png
+        href: https://homelab.example.ts.net:8443
+        description: Passwords
+        server: local
+        container: vaultwarden
+    - n8n:
+        icon: n8n.png
+        href: https://homelab.example.ts.net:8445
+        description: Automation
+        server: local
+        container: n8n
+- Observe:
+    - Netdata:
+        icon: netdata.png
+        href: https://homelab.example.ts.net:8461
+        server: local
+        container: netdata
+    - Scrutiny:
+        icon: scrutiny.png
+        href: https://homelab.example.ts.net:8463
+        server: local
+        container: scrutiny
+    - Dozzle:
+        icon: dozzle.png
+        href: https://homelab.example.ts.net:8454
+        server: local
+        container: dozzle

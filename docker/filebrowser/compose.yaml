@@ -1,0 +1,18 @@
+services:
+  filebrowser:
+    image: filebrowser/filebrowser:${FILEBROWSER_VERSION:-latest}
+    container_name: filebrowser
+    restart: unless-stopped
+    user: "1000:1000"
+    group_add: ["1001"]               # shared 'backupaccess' group
+    ports:
+      - "127.0.0.1:8092:80"
+    volumes:
+      - { type: bind, source: /mnt/hdd1,   target: /srv/hdd1,   bind: { create_host_path: false } }
+      - { type: bind, source: /mnt/backup, target: /srv/backup, read_only: true, bind: { create_host_path: false } }
+      - ./data/filebrowser.db:/database/filebrowser.db
+    environment:
+      FB_DATABASE: /database/filebrowser.db
+    security_opt: ["no-new-privileges:true"]
+    cap_drop: [ALL]
+    logging: { driver: json-file, options: { max-size: "10m", max-file: "3" } }

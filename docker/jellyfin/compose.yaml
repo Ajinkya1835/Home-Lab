@@ -1,0 +1,24 @@
+services:
+  jellyfin:
+    image: jellyfin/jellyfin:${JELLYFIN_VERSION:-latest}
+    container_name: jellyfin
+    restart: unless-stopped
+    devices:
+      - /dev/dri:/dev/dri            # VAAPI hardware transcoding (AMD iGPU)
+    group_add: ["video", "110"]      # 110 = render group on the host (check: getent group render)
+    volumes:
+      - ${MEDIA_ROOT:-/mnt/backup/media}/config:/config
+      - ${MEDIA_ROOT:-/mnt/backup/media}/movies:/media/movies:ro
+      - ${MEDIA_ROOT:-/mnt/backup/media}/tv:/media/tv:ro
+      - ${MEDIA_ROOT:-/mnt/backup/media}/music:/media/music:ro
+    ports:
+      - "127.0.0.1:8096:8096"
+    environment:
+      TZ: Asia/Kolkata
+    security_opt: ["no-new-privileges:true"]
+    healthcheck:
+      test: ["CMD", "curl", "-fs", "http://127.0.0.1:8096/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+    logging: { driver: json-file, options: { max-size: "10m", max-file: "3" } }

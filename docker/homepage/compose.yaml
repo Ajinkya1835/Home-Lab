@@ -1,0 +1,34 @@
+services:
+  homepage:
+    image: ghcr.io/gethomepage/homepage:${HOMEPAGE_VERSION:-latest}
+    container_name: homepage
+    env_file: [.env]
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:3030:3000"          # never bind the dashboard to 0.0.0.0
+    volumes:
+      - ./config:/app/config
+      # Bind individual files. Mounting a directory over /app/public hides the image's
+      # own locales/ and assets, and every UI label renders as a raw i18n key.
+      - ./public/favicon.ico:/app/public/favicon.ico:ro
+      - ./public/icon-192.png:/app/public/icon-192.png:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro   # widgets only inspect containers
+      - /mnt:/mnt:ro,rslave                            # disk widgets
+    environment:
+      HOMEPAGE_ALLOWED_HOSTS: ${HOMEPAGE_ALLOWED_HOSTS:?set in .env}
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    security_opt: ["no-new-privileges:true"]
+    healthcheck:
+      test: ["CMD", "wget", "-q", "--spider", "http://127.0.0.1:3000/"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 20s
+    logging: { driver: json-file, options: { max-size: "10m", max-file: "3" } }
+    networks: [default, immich, jellyfin, netdata, scrutiny]
+networks:
+  immich:    { name: immich_default,    external: true }
+  jellyfin:  { name: jellyfin_default,  external: true }
+  netdata:   { name: netdata_default,   external: true }
+  scrutiny:  { name: scrutiny_default,  external: true }

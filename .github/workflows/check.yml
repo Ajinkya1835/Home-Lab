@@ -13,6 +13,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: compose files validate
+        run: ./scripts/validate.sh
+
+      - name: shellcheck
+        run: |
+          sudo apt-get -qq install -y shellcheck >/dev/null
+          shellcheck -S warning scripts/*.sh host/*.sh examples/*.sh
+
       - name: yaml parses
         run: |
           python3 - <<'PY'

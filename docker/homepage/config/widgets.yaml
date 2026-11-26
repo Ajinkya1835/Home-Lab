@@ -1,0 +1,4 @@
+- resources: { cpu: true, memory: true, cputemp: true, uptime: true, units: metric }
+- resources: { label: Boot SSD, disk: / }
+- resources: { label: hdd1, disk: /mnt/hdd1 }
+- resources: { label: Backup, disk: /mnt/backup }

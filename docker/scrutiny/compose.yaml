@@ -1,0 +1,19 @@
+services:
+  scrutiny:
+    image: ghcr.io/analogj/scrutiny:${SCRUTINY_VERSION:-latest-omnibus}
+    container_name: scrutiny
+    restart: unless-stopped
+    cap_add: [SYS_RAWIO, SYS_ADMIN]
+    environment:
+      COLLECTOR_CRON_SCHEDULE: "0 */6 * * *"
+    ports:
+      - "127.0.0.1:8085:8080"
+    volumes:
+      - /run/udev:/run/udev:ro
+      - ./config:/opt/scrutiny/config
+      - ./influxdb:/opt/scrutiny/influxdb
+    devices:                           # list every disk you want S.M.A.R.T. data for
+      - /dev/sda
+      - /dev/sdb
+      - /dev/sdc
+    logging: { driver: json-file, options: { max-size: "10m", max-file: "3" } }

@@ -22,7 +22,7 @@ stacks whose compose hash changed, and writes a structured event on failure.
 ## Deploying by hand
 
 ```bash
-cd ~/Home-server
+cd ~/Home-Lab
 git pull --rebase --autostash
 for d in docker/*/; do
   f=$(ls "$d"compose.y*ml "$d"docker-compose.y*ml 2>/dev/null | head -1); [ -n "$f" ] || continue
@@ -44,7 +44,7 @@ done
 ```bash
 cd ~/docker/<stack>
 docker compose down
-cp -a ~/Home-server/docker/<stack>/compose.yaml .
+cp -a ~/Home-Lab/docker/<stack>/compose.yaml .
 docker compose up -d
 docker compose logs -f --tail 50
 ```
@@ -63,7 +63,7 @@ Config for most stacks lives in `~/docker/<stack>/config` and is mirrored in the
 ## Restoring the host
 
 1. Install Ubuntu, create the user, add the SSH key.
-2. Clone the repo to `~/Home-server`.
+2. Clone the repo to `~/Home-Lab`.
 3. Restore `host/` files (fstab, sshd, cron) and unlock the LUKS data disk.
 4. `~/bin/deploy` twice: the first run records a baseline, the second brings stacks up.
 5. Verify from the dashboard, then re-enable the timers.

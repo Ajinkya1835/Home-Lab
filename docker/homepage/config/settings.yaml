@@ -1,0 +1,7 @@
+title: Homelab
+theme: light
+color: rose
+headerStyle: boxed
+layout:
+  Apps:    { style: row, columns: 4 }
+  Observe: { style: row, columns: 4 }

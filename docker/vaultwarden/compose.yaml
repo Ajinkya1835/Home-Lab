@@ -1,0 +1,14 @@
+services:
+  vaultwarden:
+    image: vaultwarden/server:${VAULTWARDEN_VERSION:-1.37.1}
+    container_name: vaultwarden
+    restart: unless-stopped
+    environment:
+      SIGNUPS_ALLOWED: "false"
+      DOMAIN: ${VAULTWARDEN_DOMAIN:?set in .env}
+    volumes:
+      - ./data:/data
+    ports:
+      - "127.0.0.1:8081:80"
+    security_opt: ["no-new-privileges:true"]
+    logging: { driver: json-file, options: { max-size: "10m", max-file: "3" } }
