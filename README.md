@@ -2,7 +2,7 @@
 
 <img src="demo/og.png" alt="Homelab dashboard preview" width="760">
 
-# 🏠 Home-Lab
+# Home-Lab
 
 **A single-node, git-defined private cloud.**
 Photos, media, passwords and automation on one recycled laptop — private by default, rebuilt from git.
@@ -20,22 +20,22 @@ Photos, media, passwords and automation on one recycled laptop — private by de
 
 ---
 
-## ✨ Highlights
+## Highlights
 
 | | |
 |---|---|
-| 🔒 **Private by default** | Every container binds to `127.0.0.1`. Access is through [Tailscale](https://tailscale.com); `ufw` is default-deny and only opens `tailscale0`. |
-| 🌍 **One public door, by design** | Only a static portfolio (`edge`, nginx) is meant for the internet, via Tailscale Funnel. Everything with credentials stays tailnet-only. |
-| ♻️ **Rebuilt from git** | Each service is a Compose stack in [`docker/`](docker). Secrets never enter git: `.env.example` carries names only. |
-| ✅ **CI-validated** | Every push validates all Compose files, lints shell, scans for secrets (gitleaks) and for leaked private addresses. |
-| 💾 **Encrypted data disk** | Photos live on a LUKS2 (AES-XTS-512) disk; backups run nightly to a second drive. |
-| 📈 **Observable** | Netdata for metrics, Dozzle for logs, Scrutiny for S.M.A.R.T. disk health, Homepage as the front door. |
+| **Private by default** | Every container binds to `127.0.0.1`. Access is through [Tailscale](https://tailscale.com); `ufw` is default-deny and only opens `tailscale0`. |
+| **One public door, by design** | Only a static portfolio (`edge`, nginx) is meant for the internet, via Tailscale Funnel. Everything with credentials stays tailnet-only. |
+| **Rebuilt from git** | Each service is a Compose stack in [`docker/`](docker). Secrets never enter git: `.env.example` carries names only. |
+| **CI-validated** | Every push validates all Compose files, lints shell, scans for secrets (gitleaks) and for leaked private addresses. |
+| **Encrypted data disk** | Photos live on a LUKS2 (AES-XTS-512) disk; backups run nightly to a second drive. |
+| **Observable** | Netdata for metrics, Dozzle for logs, Scrutiny for S.M.A.R.T. disk health, Homepage as the front door. |
 
 <div align="center">
 <img src="demo/dashboard.png" alt="Homepage dashboard: CPU, memory, temperature, uptime and disk widgets" width="900">
 </div>
 
-## 🧱 What's running
+## What's running
 
 | Stack | Purpose | Local port | Exposure |
 |---|---|---|---|
@@ -50,7 +50,7 @@ Photos, media, passwords and automation on one recycled laptop — private by de
 | [`filebrowser`](docker/filebrowser) | Web file manager (backup mount read-only) | 8092 | tailnet |
 | [`edge`](docker/edge) | Static portfolio ([`demo/`](demo)) | 8480 | **public (Funnel)** |
 
-## 🗺️ Architecture
+## Architecture
 
 ```mermaid
 flowchart LR
@@ -86,7 +86,7 @@ flowchart LR
 
 More detail, including the deploy loop, in [`docs/architecture.md`](docs/architecture.md).
 
-## 🚀 Quick start
+## Quick start
 
 ```bash
 git clone https://github.com/Ajinkya1835/Home-Lab.git && cd Home-Lab
@@ -106,7 +106,7 @@ sudo cp host/sshd_config.d/10-hardening.conf /etc/ssh/sshd_config.d/   # after y
 > Edit each `docker/<stack>/.env` before the first start (Immich DB password, Vaultwarden domain, etc.).
 > `docker/homepage/config/*.yaml` use `homelab.example.ts.net` placeholders - swap in your own tailnet name.
 
-## 📁 Repository layout
+## Repository layout
 
 ```text
 .
@@ -120,7 +120,7 @@ sudo cp host/sshd_config.d/10-hardening.conf /etc/ssh/sshd_config.d/   # after y
 └── .github/             CI (check), Pages deploy, Dependabot
 ```
 
-## 🔁 Operations
+## Operations
 
 | When | Job |
 |---|---|
@@ -132,7 +132,7 @@ sudo cp host/sshd_config.d/10-hardening.conf /etc/ssh/sshd_config.d/   # after y
 
 Recovery steps live in the [runbook](docs/runbook.md).
 
-## 🛡️ Security model
+## Security model
 
 1. **Network:** no service listens on a public interface; the firewall only admits `tailscale0`.
 2. **Exposure:** the internet sees one static site. Anything holding credentials stays tailnet-only.
@@ -142,7 +142,7 @@ Recovery steps live in the [runbook](docs/runbook.md).
 
 Details and the reasoning behind each choice: [`docs/security.md`](docs/security.md).
 
-## 🧰 Hardware
+## Hardware
 
 | | |
 |---|---|
@@ -152,7 +152,7 @@ Details and the reasoning behind each choice: [`docs/security.md`](docs/security
 | Backup | 1 TB HDD |
 | OS | Ubuntu 22.04 LTS |
 
-## 🧭 Roadmap
+## Roadmap
 
 - [ ] Off-site, encrypted backup copy (restic → object storage)
 - [ ] Put the Docker socket behind a read-only socket proxy
@@ -160,6 +160,6 @@ Details and the reasoning behind each choice: [`docs/security.md`](docs/security
 - [ ] Alerting: Netdata → push notification on disk, temperature and backup failures
 - [ ] Upgrade host to Ubuntu 24.04 LTS
 
-## 📄 License
+## License
 
 [MIT](LICENSE)
